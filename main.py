@@ -84,7 +84,7 @@ def menu():
 
         elif opcao == '3':
             l_arr = ListaArray()
-            l_list = ListaListaLista()
+            l_list = ListaListaLigada()
             benchmark(l_arr, l_list, "Lista - Inserir no Inicio", N_LENTO) 
 
         elif opcao == '4':
