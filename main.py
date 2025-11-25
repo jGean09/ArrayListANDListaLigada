@@ -161,6 +161,7 @@ def gerar_todos_os_graficos():
         gerar_grafico(entradas, res_arr["ins"], f"{cenario['nome']} - Array - Inserir", f"{pfx}array_inserir.png")
         gerar_grafico(entradas, res_arr["rem"], f"{cenario['nome']} - Array - Remover", f"{pfx}array_remover.png")
         gerar_grafico(entradas, res_lst["ins"], f"{cenario['nome']} - Lista - Inserir", f"{pfx}lista_inserir.png")
+        gerar_grafico(entradas, res_lst["rem"], f"{cenario['nome']} - Lista - Remover", f"{pfx}lista_remover.png")
         
         # 3. Gerar Comparativos (Array vs Lista)
         # Usamos os dados coletados acima
