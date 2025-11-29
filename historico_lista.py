@@ -25,13 +25,13 @@ class HistoricoListaEncadeada:
     def is_empty(self):
         return self.cabeca == None    #verifica se a cabeca está vazia, indicando que a lista está vazia
 
-    def quantidade_itens(self):       # retorna tamanho lógico, a quantidade de dados inseridos
+    def quantidade_links_lista(self):       # retorna tamanho lógico, a quantidade de dados inseridos
         return self.tamanho
     
-    def tamanho_fisico(self):        #retorna tamanho físico da lista
+    def tamanho_fisico_hist_lista(self):        #retorna tamanho físico da lista
         return self.tamanho
 
-    def inserir_item(self, item):
+    def inserir_item_hist_lista(self, item):
          inicio = time.perf_counter()  #início de contagem de tempo
 
          novo = No(item)              #o novo nó é do tipo Nó, recebendo item
@@ -42,7 +42,7 @@ class HistoricoListaEncadeada:
          fim = time.perf_counter()     #fim de contagem de tempo
          self.tempos_push.append(fim - inicio)    #guarda tempo transcorrido
 
-    def remover_item(self):
+    def remover_item_hist_lista(self):
         inicio = time.perf_counter()
 
         if self.is_empty():              #se a pilha estiver vazia, é retornado None (sem intens)        

@@ -175,6 +175,420 @@ def gerar_todos_os_graficos():
 #   INTERFACE DO USUÁRIO
 # ============================================================
 
+# MENUS PARA EXECUÇÃO DO ALGORITMO HISTÓRICO WEB
+
+def menu_historico_array():
+
+    historico = HistoricoArray()    #instancia objeto do tipo HistoricoArray
+
+    while True:
+        print("="*60)
+        print(" HISTORICO WEB - FUNÇÕES NO ARRAY")
+        print("="*60)
+        print("1.  Inserir Novo Link")
+        print("2.  Verificar Qtdd Links Inseridos")
+        print("3.  Verificar Tamanho Total do Array")
+        print("4.  Remover Link")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            link = input("Digite o site que deseja visitar: ")     #insere novo item (link)
+            historico.inserir_item_hist_array(link)        #chama método para inserir link no historico
+
+            print(f"Novo item inserido: {link}")
+        elif op == 2:
+
+            links_totais = historico.quantidade_links()     #retorna total de links
+            print(f"Quantidade de itens inseridos: {links_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_array = historico.tamanho_fisico_hist_array()  #pré-alocado
+            print(f"O tamanho físico do array é: {tamanho_total_array}")
+
+        elif op == 4:
+
+            item_removido = historico.remover_item_hist_array()   #remove último link inserido
+            print(f"Item removido: {item_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = historico.aumentar_tamanho()   #aumenta tamanho físico
+            print(f"Após o aumento, o novo tamanho físico array é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = historico.diminuir_tamanho_hist_array()   #diminui tamanho físico
+            print(f"Após a diminuição, o novo tamanho físico do array é: {tamanho_fisico_reduzido}")
+
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+def menu_historico_lista_encadeada():
+
+    historico = HistoricoListaEncadeada()    #instancia objeto do tipo HistoricoListaEncadeada
+
+    while True:
+        print("="*60)
+        print(" HISTORICO WEB - FUNÇÕES NA LISTA ENCADEADA")
+        print("="*60)
+        print("1.  Inserir Novo Link")
+        print("2.  Verificar Qtdd Links Inseridos")
+        print("3.  Verificar Tamanho Total da Lista Encadeada")
+        print("4.  Remover Link")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            link = input("Digite o site que deseja visitar: ")     #insere novo valor (link)
+            historico.inserir_item_hist_lista(link)         #chama método para inserir
+
+            print(f"Novo item inserido: {link}")
+        elif op == 2:
+
+            links_totais = historico.quantidade_links_lista()    #retorna links totais inseridos
+            print(f"Quantidade de itens inseridos: {links_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_lista = historico.tamanho_fisico_hist_lista() #tamanho físico atual
+            print(f"O tamanho físico da lista encadeada é: {tamanho_total_lista}")
+
+        elif op == 4:
+
+            item_removido = historico.remover_item_hist_lista()   #remove último link inserido
+            print(f"Item removido: {item_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = historico.aumentar_tamanho()    #dobra tamanho físico
+            print(f"Após o aumento, o novo tamanho físico da lista encadeada é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = historico.diminuir_tamanho()  #diminui tamanho físico na metade
+            print(f"Após a diminuição, o novo tamanho físico da lista encadeada é: {tamanho_fisico_reduzido}")
+
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+def menu_historico_estruturas():
+    while True:
+        print("\n" + "="*40)
+        print(" MENU ALGORITMO HISTORICO WEB ")
+        print("="*40)
+        print("1. Executar com ARRAY")
+        print("2. Executar com LISTA ENCADEADA")
+        print("0. Voltar ao Menu Principal")
+
+        op = int(input("\nEscolha uma opção de estrutura: "))
+
+        if op == 1:
+            menu_historico_array()
+
+        elif op == 2:
+            menu_historico_lista_encadeada()
+
+        elif op == 0:
+            break
+        else:
+            print("Opção inválida!")
+
+# MENUS PARA EXECUÇÃO DO ALGORITMO PEDIDOS DE LANCHONETE   
+
+def menu_pedidos_array():
+    pedidos = PedidosArray()     #instancia objeto "pedido" do tipo PedidosArray, que é a sua classe
+
+    while True:
+        print("="*60)
+        print(" PEDIDOS DE LANCHONETE - FUNÇÕES NO ARRAY")
+        print("="*60)
+        print("1.  Fazer Novo Pedido")
+        print("2.  Verificar Qtdd Pedidos Feitos")
+        print("3.  Verificar Tamanho Total do Array de Pedidos")
+        print("4.  Atender Pedido (Remover)")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            pedido = input("Digite o pedido que deseja fazer: ")     #insere novo valor (pedido)
+            pedidos.novo_pedido(pedido)         #chama método para inserir/fazer pedido
+
+            print(f"Novo pedido feito: {pedido}")
+        elif op == 2:
+
+            pedidos_totais = pedidos.quantidade_itens()   #retorna total de pedidos feitos
+            print(f"Quantidade de pedidos inseridos: {pedidos_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_array = pedidos.tamanho_fisico()   #pré-alocado
+            print(f"O tamanho físico do array é: {tamanho_total_array}")
+
+        elif op == 4:
+
+            pedido_removido = pedidos.atender_pedido()       #remove primeiro pedido inserido ("atende")
+            print(f"Item removido: {pedido_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = pedidos.aumentar_tamanho()  #aumenta tamanho físico (dobro)
+            print(f"Após o aumento, o novo tamanho físico do array é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = pedidos.diminuir_tamanho()
+            print(f"Após a diminuição, o novo tamanho físico do array é: {tamanho_fisico_reduzido}")
+
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+def menu_pedidos_lista_encadeada():
+
+    pedidos = PedidosListaEncadeada()
+
+    while True:
+        print("="*60)
+        print(" PEDIDOS DE LANCHONETE - FUNÇÕES NA LISTA ENCADEADA")
+        print("="*60)
+        print("1.  Fazer Novo Pedido")
+        print("2.  Verificar Qtdd Pedidos Feitos")
+        print("3.  Verificar Tamanho Total da Lista Encadeada")
+        print("4.  Atender Pedido (Remover)")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            pedido = input("Digite o pedido que deseja fazer: ")     #insere novo valor (pedido)
+            pedidos.novo_pedido(pedido)         #chama método para inserir/fazer pedido
+
+            print(f"Novo pedido feito: {pedido}")
+        elif op == 2:
+
+            pedidos_totais = pedidos.quantidade_itens()
+            print(f"Quantidade de pedidos inseridos: {pedidos_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_lista = pedidos.tamanho_fisico()
+            print(f"O tamanho físico da lista encadeada é: {tamanho_total_lista}")
+
+        elif op == 4:
+
+            pedido_removido = pedidos.atender_pedido()
+            print(f"Item removido: {pedido_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = pedidos.aumentar_tamanho()
+            print(f"Após o aumento, o novo tamanho físico da lista encadaeada é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = pedidos.diminuir_tamanho()
+            print(f"Após a diminuição, o novo tamanho físico da lista encadeada é: {tamanho_fisico_reduzido}")
+
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+
+
+def menu_pedidos_estruturas():
+    while True:
+        print("\n" + "="*40)
+        print(" MENU ALGORITMO PEDIDOS DE LANCHONETE ")
+        print("="*40)
+        print("1. Executar com ARRAY")
+        print("2. Executar com LISTA ENCADEADA")
+        print("0. Voltar ao Menu Principal")
+
+        op = int(input("\nEscolha uma opção: "))
+
+        if op == 1:
+            menu_pedidos_array()
+
+        elif op == 2:
+            menu_pedidos_lista_encadeada()
+
+        elif op == 0:
+            break
+        else:
+            print("Opção inválida!")
+
+# MENUS PARA EXECUÇÃO DO ALGORITMO LISTA DE TAREFAS
+
+def menu_compras_array():
+
+    itens = ListaComprasArray()           #instancia objeto (lista) do tipo ListaComprasArray (classe)
+
+    while True:
+        print("="*60)
+        print(" LISTA DE COMPRAS DE ITENS - FUNÇÕES NO ARRAY")
+        print("="*60)
+        print("1.  Inserir Novo Item")
+        print("2.  Verificar Qtdd Itens Inseridos")
+        print("3.  Verificar Tamanho Total do Array")
+        print("4.  Comprar Item (Remover)")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            item = input("Digite o item que deseja inserir na lista de compras: ")     #insere novo valor (compras)
+            posicao = int(input("Digite a posição que deseja inserir o item na lista: "))
+            itens.inserir_item_posicao(posicao, item)         #chama método para inserir/fazer pedido
+
+            print(f"Novo item inserido: {item}")
+        elif op == 2:
+
+            itens_totais = itens.quantidade_itens()
+            print(f"Quantidade de itens inseridos: {itens_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_array = itens.tamanho_fisico()
+            print(f"O tamanho físico do array é: {tamanho_total_array}")
+
+        elif op == 4:
+
+            posicao_item = int(input("Digite o valor da posição do item que deseja remover: "))
+            item_removido = itens.remover_item_posicao(posicao_item)
+            print(f"Item removido: {item_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = itens.aumentar_tamanho()
+            print(f"Após o aumento, o novo tamanho físico do array é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = itens.diminuir_tamanho()
+            print(f"Após a diminuição, o novo tamanho físico do array é: {tamanho_fisico_reduzido}")
+    # =======================================================
+    #TESTE TESTE TESTE TESTE TESTE
+        elif op == 7:
+            item = input("Digite o item pra retornar posicao: ")
+            item_removido = itens.retorna_posicao(item)
+            print(f"A posicao do item removido eh: {item_removido}")
+    # ===========================================================
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+def menu_compras_lista_encadeada():
+
+    itens = ListaComprasLista()
+
+    while True:
+        print("="*60)
+        print(" PEDIDOS DE LANCHONETE - FUNÇÕES NA LISTA ENCADEADA")
+        print("="*60)
+        print("1.  Fazer Novo Pedido")
+        print("2.  Verificar Qtdd Pedidos Feitos")
+        print("3.  Verificar Tamanho Total da Lista Encadeada")
+        print("4.  Atender Pedido (Remover)")
+        print("5.  Aumentar Tamanho Físico")
+        print("6.  Diminuir Tamanho Físico")
+        print("0.  Voltar ao Menu Principal")
+
+        op = int(input("Escolha sua opção: "))
+
+        if op == 1:
+
+            item = input("Digite o item que deseja inserir: ")     #insere novo valor (item)
+            itens.inserir_item_posicao(item)         #chama método para inserir item na lista de compras
+
+            print(f"Novo item inserido: {item}")
+        elif op == 2:
+
+            pedidos_totais = itens.quantidade_itens()
+            print(f"Quantidade de itens inseridos: {pedidos_totais}")
+
+        elif op == 3:     
+
+            tamanho_total_lista = itens.tamanho_fisico()
+            print(f"O tamanho físico da lista encadeada é: {tamanho_total_lista}")
+
+        elif op == 4:
+
+            posicao = int(input("Digite a posição do item que deseja remover: "))
+            pedido_removido = itens.remover_item_posicao()
+            print(f"Item removido: {pedido_removido}")
+
+        elif op == 5:
+
+            novo_tamanho_fisico = itens.aumentar_tamanho()
+            print(f"Após o aumento, o novo tamanho físico da lista encadaeada é: {novo_tamanho_fisico}")
+
+        elif op == 6:
+
+            tamanho_fisico_reduzido = itens.diminuir_tamanho()
+            print(f"Após a diminuição, o novo tamanho físico da lista encadeada é: {tamanho_fisico_reduzido}")
+
+        elif op == 0:
+            break
+
+        else:
+            print("Opção inválida!")
+
+def menu_compras_estruturas():
+    while True:
+        print("\n" + "="*40)
+        print(" MENU ALGORITMO LISTA DE TAREFAS ")
+        print("="*40)
+        print("1. Executar com ARRAY")
+        print("2. Executar com LISTA ENCADEADA")
+        print("0. Voltar ao Menu Principal")
+
+        op = int(input("\nEscolha uma opção: "))
+
+        if op == 1:
+            menu_compras_array()
+
+        elif op == 2:
+            menu_compras_lista_encadeada()
+
+        elif op == 0:
+            break
+        else:
+            print("Opção inválida!")
+
+
+# MENU PRINCIPAL (ESCOLHER ALGORITMOS)
 def menu():
     while True:
         print("\n" + "="*40)
@@ -186,26 +600,24 @@ def menu():
         print("4. GERAR RELATÓRIO COMPLETO (Gráficos)")
         print("0. Sair")
         
-        op = input("\nEscolha uma opção: ")
+        op = input("\nEscolha uma opção: ")  
 
         if op == "1":
-            # Exemplo simples de interação
-            p = HistoricoArray()
-            p.inserir_item("google.com")
-            print("Visitou google.com (Pilha Array)")
+            menu_historico_estruturas()
+
         elif op == "2":
-            f = PedidosArray()
-            f.novo_pedido("X-Bacon")
-            print("Pedido X-Bacon entrou na fila (Fila Array)")
+            menu_pedidos_estruturas()
+
         elif op == "3":
-            l = ListaComprasArray()
-            l.inserir_item_posicao(0, "Arroz")
-            print("Arroz adicionado na lista (Lista Array)")
+            menu_compras_estruturas()
+
         elif op == "4":
             gerar_todos_os_graficos()
+
         elif op == "0":
             print("Saindo...")
             break
+
         else:
             print("Opção inválida!")
 
