@@ -24,10 +24,10 @@ class HistoricoArray:
     def is_empty(self):
         return self.topo == 0                    # verifica se pilha está vazia com atributo topo
    
-    def quantidade_itens(self):          #retorna tamanho lógico, a quantidade de dados inseridos
+    def quantidade_links(self):          #retorna tamanho lógico, a quantidade de dados inseridos
         return self.topo
     
-    def tamanho_fisico(self):            #retorna tamanho físico do array, posições pré-alocadas
+    def tamanho_fisico_hist_array(self):            #retorna tamanho físico do array, posições pré-alocadas
         return self.tamanho
     
     def aumentar_tamanho(self):
@@ -47,7 +47,7 @@ class HistoricoArray:
 
         return self.tamanho
 
-    def diminuir_tamanho(self):
+    def diminuir_tamanho_hist_array(self):
         inicio = time.perf_counter()
 
         novo_tamanho = max(10, self.tamanho // 2)   #reduz tamanho pela metade, sem deixar ficar menor que 10
@@ -70,11 +70,11 @@ class HistoricoArray:
 
         return self.tamanho
 
-    def inserir_item(self, item):
+    def inserir_item_hist_array(self, item):
         inicio = time.perf_counter()
 
         if self.is_full():               # se a pilha estiver cheia, é preciso aumentar seu tamanho
-            self.aumentar_tamanho()   
+            self.aumentar_tamanho_hist_array()   
         
         self.array[self.topo] = item     # a posição "topo" (vazia) do array receeb o novo dado
         self.topo += 1                   # posição "topo" incrementa mais 1
@@ -82,7 +82,7 @@ class HistoricoArray:
         fim = time.perf_counter()
         self.tempos_push.append(fim - inicio)
 
-    def remover_item(self):
+    def remover_item_hist_array(self):
         inicio = time.perf_counter()
 
         if self.is_empty():              #se a pilha estiver vazia (sem dados), retorna None
@@ -96,10 +96,8 @@ class HistoricoArray:
         self.tempos_pop.append(fim - inicio)
 
         if self.topo <= self.tamanho // 4:  #se a qtdd de dados preenchidos for menor que 1/4 da tamanho
-            self.diminuir_tamanho()         #então, o tamanho será reduzido
+            self.diminuir_tamanho_hist_array()         #então, o tamanho será reduzido
 
         return valor  #retorna dado que foi removido
-    
-    
         
         

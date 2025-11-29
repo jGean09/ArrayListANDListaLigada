@@ -56,14 +56,14 @@ class ListaComprasArray:
         return self.tamanho
 
     def inserir_item_posicao(self, posicao, item):
-        inicio = time.perf_counter()
+        inicio = time.perf_counter()      
 
-        if self.is_full():
+        if self.is_full():             #se estiver cheio, aumenta o tamanho
             self.aumentar_tamanho()
-        
+
         # Validação básica
-        if posicao < 0: posicao = 0
-        if posicao > self.quantidade: posicao = self.quantidade
+        if posicao < 0: posicao = 0      #se posicao passada for menor que 0, automaticamente será 0
+        if posicao > self.quantidade: posicao = self.quantidade    #se a posicao > self.quantidade, posicao passa a ser quantidade
 
         # Desloca elementos para a direita para abrir espaço
         for i in range(self.quantidade, posicao, -1):
@@ -75,11 +75,11 @@ class ListaComprasArray:
         fim = time.perf_counter()
         self.tempos_inserir_posicao.append(fim - inicio)
 
-    def remover_item_posicao(self, posicao):
+    def remover_item_posicao(self, posicao):   
         inicio = time.perf_counter()
 
-        if self.is_empty(): return None
-        if posicao < 0 or posicao >= self.quantidade: return None
+        if self.is_empty(): return None    
+        if posicao < 0 or posicao >= self.quantidade: return None   
 
         valor = self.array[posicao]
 
