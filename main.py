@@ -3,7 +3,6 @@ import gc
 import time
 import matplotlib.pyplot as plt
 
-# Importando as classes (assumindo que estão na mesma pasta)
 from historico_array import HistoricoArray
 from historico_lista import HistoricoListaEncadeada
 from Pedidos_Array import PedidosArray

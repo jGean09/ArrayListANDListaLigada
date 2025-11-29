@@ -30,33 +30,50 @@ class ListaComprasLista:
         return self.tamanho
 
     def inserir_item_posicao(self, posicao, item):
-         inicio = time.perf_counter()
-
-         novo = No(item)
+        inicio = time.perf_counter()
+        
+        # Flag para saber se a operação deu certo
+        inseriu_com_sucesso = False 
+        novo = No(item)
          
-         if posicao <= 0: # Inserir no início
+        # CENÁRIO 1: Inserir no Início (Ou lista vazia)
+        if posicao <= 0: 
              novo.prox = self.cabeca
              self.cabeca = novo
-         else:
+             inseriu_com_sucesso = True
+
+        # CENÁRIO 2: Inserir no Meio ou Fim
+        else:
              atual = self.cabeca
              indice_atual = 0
-             # Navega até a posição anterior
+             
+             # Navega até encontrar a posição anterior OU acabar a lista
              while atual is not None and indice_atual < posicao - 1:
                  atual = atual.prox
                  indice_atual += 1
              
+             # Se 'atual' não é None, significa que encontramos o "pai" do novo nó
              if atual is not None:
                  novo.prox = atual.prox
                  atual.prox = novo
+                 inseriu_com_sucesso = True
+             
+             # Se 'atual' for None, significa que a posição pedida é maior 
+             # que a lista suporta. O código cai aqui e NÃO marca sucesso.
+             # Exemplo: Lista tem tamanho 3, você pede posição 10.
              else:
-                 # Se posição for maior que a lista, adiciona no final (se vazia)
-                 if self.cabeca is None: self.cabeca = novo
+                 # Opcional: Se quiser que insira no final mesmo com índice errado:
+                 # (Mas para ser rigoroso, deixamos passar em branco)
+                 pass
 
-         self.tamanho += 1
-
-         fim = time.perf_counter()
-         self.tempos_inserir_posicao.append(fim - inicio)
-
+        # A HORA DA VERDADE
+        # Só aumenta o tamanho se realmente conectou o nó
+        if inseriu_com_sucesso:
+            self.tamanho += 1
+        
+        fim = time.perf_counter()
+        self.tempos_inserir_posicao.append(fim - inicio)
+        
     def remover_item_posicao(self, posicao):
         inicio = time.perf_counter()
 
