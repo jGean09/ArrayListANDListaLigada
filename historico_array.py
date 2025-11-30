@@ -74,7 +74,7 @@ class HistoricoArray:
         inicio = time.perf_counter()
 
         if self.is_full():               # se a pilha estiver cheia, é preciso aumentar seu tamanho
-            self.aumentar_tamanho_hist_array()   
+            self.aumentar_tamanho()   
         
         self.array[self.topo] = item     # a posição "topo" (vazia) do array receeb o novo dado
         self.topo += 1                   # posição "topo" incrementa mais 1

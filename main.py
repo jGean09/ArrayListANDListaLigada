@@ -46,58 +46,108 @@ def gerar_comparativo(entradas, tempos_array, tempos_lista, titulo, nome_arquivo
     plt.close()
     print(f">> Gráfico salvo: {nome_arquivo}")
 
+
 # ============================================================
-#   FUNÇÃO GENÉRICA DE TESTE (Funciona para Pilha, Fila e Lista)
+#   FUNÇÃO GENÉRICA DE TESTE (MAPEAMENTO EXPLÍCITO)
 # ============================================================
 
 def executar_teste_generico(classe_estrutura, tipo_estrutura, operacao, n_elementos):
     """
-    Roda um teste para uma estrutura específica e retorna os tempos.
-    tipo_estrutura: 'pilha', 'fila', 'lista'
+    Roda um teste de desempenho mapeando explicitamente os nomes dos métodos
+    de cada classe (HistoricoArray, HistoricoLista, Pedidos, etc).
     """
+    
+    # 1. Limpeza de Memória
+    # Força o Python a limpar o lixo da memória RAM antes de começar o teste
+    # para que resíduos de testes anteriores não deixem este teste lento.
     gc.collect()
+    
+    # 2. Instanciação da Classe
+    # Cria o objeto (ex: cria uma nova Pilha ou Fila vazia)
     estrutura = classe_estrutura()
     
-    # Medir Inserção (Push / Novo Pedido / Adicionar)
-    t0 = time.perf_counter()
+    # Pega o nome da classe como string (ex: "HistoricoArray") para usarmos nos IFs
+    nome_classe = type(estrutura).__name__
+
+    # ---------------------------------------------------------
+    # PARTE 1: MEDIR INSERÇÃO
+    # ---------------------------------------------------------
+    t0 = time.perf_counter() # Inicia o cronômetro
+    
     for i in range(n_elementos):
         item = f"item_{i}"
+        
+        # Lógica para PILHAS (Histórico)
         if tipo_estrutura == 'pilha':
-            estrutura.inserir_item(item)
-        elif tipo_estrutura == 'fila':
-            estrutura.novo_pedido(item)
-        elif tipo_estrutura == 'lista':
-            # Teste crucial: Inserir no INÍCIO (0) para forçar o pior caso do Array
-            estrutura.inserir_item_posicao(0, item)
-    tempo_ins = time.perf_counter() - t0
+            if nome_classe == 'HistoricoArray':
+                estrutura.inserir_item_hist_array(item)   # Nome específico do Array
+            else:
+                estrutura.inserir_item_hist_lista(item)   # Nome específico da Lista
 
-    # Medir Remoção (Pop / Atender / Remover)
-    t0 = time.perf_counter()
-    for i in range(n_elementos):
-        if tipo_estrutura == 'pilha':
-            estrutura.remover_item()
+        # Lógica para FILAS (Lanchonete)
         elif tipo_estrutura == 'fila':
-            estrutura.atender_pedido()
+            estrutura.novo_pedido(item)                   # Ambos usam novo_pedido
+
+        # Lógica para LISTAS GENÉRICAS (Compras)
         elif tipo_estrutura == 'lista':
-            # Remove do início
+            # Insere sempre na posição 0 para forçar o "Pior Caso" do Array
+            estrutura.inserir_item_posicao(0, item)       
+
+    tempo_ins = time.perf_counter() - t0 # Para o cronômetro e calcula a diferença
+
+    # ---------------------------------------------------------
+    # PARTE 2: MEDIR REMOÇÃO
+    # ---------------------------------------------------------
+    t0 = time.perf_counter()
+    
+    for i in range(n_elementos):
+        
+        # Lógica para PILHAS
+        if tipo_estrutura == 'pilha':
+            if nome_classe == 'HistoricoArray':
+                estrutura.remover_item_hist_array()       # Nome específico do Array
+            else:
+                estrutura.remover_item_hist_lista()       # Nome específico da Lista
+
+        # Lógica para FILAS
+        elif tipo_estrutura == 'fila':
+            estrutura.atender_pedido()                    # Ambos usam atender_pedido
+
+        # Lógica para LISTAS GENÉRICAS
+        elif tipo_estrutura == 'lista':
+            # Remove da posição 0 (início)
             estrutura.remover_item_posicao(0)
+
     tempo_rem = time.perf_counter() - t0
 
-    # Medir Aumentar (Resize) - Fake na Lista, Real no Array
-    # Recriamos para testar o aumento isolado
+    # ---------------------------------------------------------
+    # PARTE 3: MEDIR AUMENTO DE TAMANHO (RESIZE)
+    # ---------------------------------------------------------
+    # Recriamos a estrutura para testar o aumento de forma isolada
     gc.collect()
     est_temp = classe_estrutura()
+    
     t0 = time.perf_counter()
-    # Força resize chamando método direto (se existir e for público) ou enchendo
-    # No seu modelo, chamamos direto o método:
+    
+    # Todas as suas classes usam o nome padrão 'aumentar_tamanho', então não precisa de IF
     est_temp.aumentar_tamanho()
+    
     tempo_aum = time.perf_counter() - t0
 
-    # Medir Diminuir
+    # ---------------------------------------------------------
+    # PARTE 4: MEDIR DIMINUIÇÃO DE TAMANHO
+    # ---------------------------------------------------------
     t0 = time.perf_counter()
-    est_temp.diminuir_tamanho()
+    
+    # Aqui tem uma pegadinha: O HistoricoArray usa um nome diferente!
+    if nome_classe == 'HistoricoArray':
+        est_temp.diminuir_tamanho_hist_array()  # Nome exclusivo dessa classe
+    else:
+        est_temp.diminuir_tamanho()             # Nome padrão para todas as outras
+        
     tempo_dim = time.perf_counter() - t0
 
+    # Retorna os 4 tempos medidos para serem usados no gráfico
     return tempo_ins, tempo_rem, tempo_aum, tempo_dim
 
 # ============================================================
